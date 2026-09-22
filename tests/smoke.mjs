@@ -60,14 +60,18 @@ for (const [path, html] of pages) {
 }
 assert.equal((await fetch(base + "/this-page-does-not-exist")).status, 404);
 assert.match(await (await fetch(base + "/robots.txt")).text(), /Disallow: \//);
+const home = pages.get("/");
+const skills = pages.get("/skills");
+for (const html of [home, skills]) {
+  assert.match(html, /Coming soon/i);
+  assert.doesNotMatch(html, /Risk-based test planning/);
+  assert.doesNotMatch(html, /Release-readiness review/);
+  assert.doesNotMatch(html, /Download the playbook/);
+}
 for (const file of ["risk-based-test-planning", "release-readiness"]) {
   const response = await fetch(`${base}/playbooks/${file}.md`);
-  assert.equal(response.status, 200);
-  const body = await response.text();
-  assert.match(body, /## Copyable prompt/);
-  assert.match(body, /## Human review checklist/);
+  assert.equal(response.status, 404);
 }
-const home = pages.get("/");
 const scripts = [...home.matchAll(/<script\b[^>]*src="([^"]+)"[^>]*>/g)]
   .filter((m) => !m[0].includes("noModule"))
   .map((m) => m[1]);

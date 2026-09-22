@@ -180,46 +180,20 @@ export default function Home() {
         <div className="section-heading heading-with-link">
           <div>
             <p className="eyebrow">FROM IDEAS TO PRACTICE</p>
-            <h2 id="skills-title">Small tools. Useful habits.</h2>
+            <h2 id="skills-title">AI skills are taking shape.</h2>
           </div>
           <Link className="text-link" href="/skills">
-            AI Skills & playbooks <ArrowUpRight aria-hidden="true" />
+            See what’s coming <ArrowUpRight aria-hidden="true" />
           </Link>
         </div>
-        <div className="playbook-grid">
-          <Link
-            className="playbook-card"
-            href="/skills#risk-based-test-planning"
-          >
-            <span className="mono">01 / PLANNING</span>
-            <h3>
-              Ask better
-              <br />
-              testing questions.
-            </h3>
-            <p>
-              A guided AI workflow for turning a feature brief into risks, test
-              ideas and unanswered questions.
-            </p>
-            <span className="card-bottom">
-              Risk-based test planning <ArrowUpRight aria-hidden="true" />
-            </span>
-          </Link>
-          <Link className="playbook-card" href="/skills#release-readiness">
-            <span className="mono">02 / DELIVERY</span>
-            <h3>
-              Make the release
-              <br />
-              decision clearer.
-            </h3>
-            <p>
-              A structured review of evidence, open risks and ownership before a
-              release goes out.
-            </p>
-            <span className="card-bottom">
-              Release-readiness review <ArrowUpRight aria-hidden="true" />
-            </span>
-          </Link>
+        <div className="coming-soon-panel">
+          <span className="tag">COMING SOON</span>
+          <h3>Practical AI skills for real QA work.</h3>
+          <p>
+            I’m developing a focused collection of useful workflows for QA
+            professionals and leaders. The first releases will appear here when
+            they’re ready.
+          </p>
         </div>
       </section>
       <section
