@@ -483,6 +483,35 @@ h2 {
   width: 19px;
   height: 19px;
 }
+.coming-soon-panel {
+  padding: clamp(30px, 5vw, 58px);
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  background: #fff;
+}
+.coming-soon-panel h2,
+.coming-soon-panel h3 {
+  max-width: 720px;
+  font-size: clamp(30px, 4vw, 46px);
+  line-height: 1.15;
+  margin: 28px 0 18px;
+}
+.coming-soon-panel p {
+  max-width: 650px;
+  color: var(--quiet);
+  font-size: 15px;
+  line-height: 1.8;
+}
+.coming-soon-panel .text-link {
+  margin-top: 28px;
+}
+.coming-soon-page {
+  min-height: 330px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
 .consult-section {
   background: #eeefe8;
   padding-block: 90px;

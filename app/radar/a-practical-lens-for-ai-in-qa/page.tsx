@@ -123,9 +123,9 @@ export default function Introduction() {
           honest evaluation and sharing what we learn.
         </p>
         <div className="article-next">
-          <p className="eyebrow">PUT IT INTO PRACTICE</p>
+          <p className="eyebrow">NEXT</p>
           <Link className="text-link" href="/skills">
-            Explore the AI playbooks <ArrowUpRight aria-hidden="true" />
+            AI Skills are coming soon <ArrowUpRight aria-hidden="true" />
           </Link>
         </div>
       </article>

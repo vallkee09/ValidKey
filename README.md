@@ -24,8 +24,7 @@ npm run test:smoke
 
 - `app/page.tsx`: homepage and biography.
 - `app/radar`: Radar introduction and reading page. The first page is an editorial draft, not a weekly news edition.
-- `app/skills`: two human-guided AI workflow playbooks.
-- `public/playbooks`: downloadable Markdown with prompts, fictional examples and review criteria. Not installed agent skills; no production-validation claims.
+- `app/skills`: a public coming-soon page while the AI skills collection is being reworked.
 - `app/consultations`: two audiences and a browser-only message builder.
 - `lib/site.ts`: identity, existing contact destinations, production-origin configuration.
 
