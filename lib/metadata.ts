@@ -1,5 +1,11 @@
 import type { Metadata } from "next";
 import { siteOrigin } from "./site";
+export const socialImage = {
+  url: "/images/valerii-kovalenko-social.png",
+  width: 1200,
+  height: 630,
+  alt: "Valerii Kovalenko — Quality Engineering, AI and Leadership",
+};
 export function pageMetadata(
   title: string,
   description: string,
@@ -15,8 +21,14 @@ export function pageMetadata(
       title,
       description,
       type: "website",
+      images: [socialImage],
       ...(siteOrigin ? { url: `${siteOrigin}${path}` } : {}),
     },
-    twitter: { card: "summary", title, description },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [socialImage],
+    },
   };
 }

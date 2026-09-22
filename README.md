@@ -33,7 +33,7 @@ The brief builder does not submit, store or send personal data. Clipboard access
 
 ## Content and assets
 
-Copy is prepared for Valerii's review before publication. Role and positioning come from the owner; no client metrics or testimonials are invented. The portrait is AI-generated from owner-supplied photos and approved in the project conversation. Its generation prompt and original output are retained in the workspace outputs directory. The original portrait remains in workspace outputs; the site serves a precompressed 960 × 1200 WebP (about 81 KB) without an image server.
+The site serves a precompressed 960 × 1200 WebP portrait (about 81 KB) without an image server. The name-based wordmark and K favicon use the site's graphite and warm-white palette. Open Graph and Twitter metadata share a 1200 × 630 PNG card in `public/images`.
 
 ## Cloudflare Pages
 
@@ -41,7 +41,7 @@ The build uses the supported Webpack pipeline to avoid Turbopack’s restricted 
 
 `npm run preview` runs the exported files in Wrangler locally on port 3101; it does not deploy them. `next start` is not used for static exports. The consultation page is prerendered; its small client-side message builder reads `?focus=career` or `?focus=leadership` within a Suspense boundary. It defaults to career for missing or unknown values.
 
-Published with owner approval on 2026-09-22 at https://valerii-kovalenko.pages.dev using Direct Upload. Project: valerii-kovalenko. The workflow in `.github/workflows/cloudflare-pages.yml` verifies pull requests and main. Once its deployment secret and activation variable are configured, passing main builds update this same Pages project. Built-in Git integration is not used. Setup and rollback instructions are in [docs/deployment.md](docs/deployment.md). Deployment identifiers, asset manifest and the exact exported ZIP are retained in workspace outputs.
+Live site: https://valerii-kovalenko.pages.dev. Project: valerii-kovalenko, using Direct Upload. The workflow in `.github/workflows/cloudflare-pages.yml` verifies pull requests and main. Once its deployment secret and activation variable are configured, passing main builds update this same Pages project. Built-in Git integration is not used. Setup and rollback instructions are in [docs/deployment.md](docs/deployment.md).
 
 ## Publication controls
 

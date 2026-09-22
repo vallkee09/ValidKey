@@ -32,10 +32,9 @@ export function Header() {
           onClick={() => setOpen(false)}
           aria-label="Valerii Kovalenko — home"
         >
-          <span className="monogram" aria-hidden="true">
-            vk<span>.</span>
+          <span>
+            Valerii <span className="brand-surname">Kovalenko</span>
           </span>
-          <span>Valerii Kovalenko</span>
         </Link>
         <button
           ref={button}

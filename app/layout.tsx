@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { isIndexable, siteOrigin } from "@/lib/site";
+import { socialImage } from "@/lib/metadata";
 import "./globals.css";
 const title = "Valerii Kovalenko — Quality Engineering & AI in QA";
 const description =
@@ -17,8 +18,14 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     siteName: "Valerii Kovalenko",
+    images: [socialImage],
   },
-  twitter: { card: "summary", title, description },
+  twitter: {
+    card: "summary_large_image",
+    title,
+    description,
+    images: [socialImage],
+  },
 };
 export default function RootLayout({
   children,

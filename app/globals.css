@@ -166,19 +166,14 @@ svg {
 .brand {
   display: flex;
   align-items: center;
-  gap: 14px;
-  font-size: 14px;
-  font-weight: 600;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 25px;
+  font-weight: 400;
   letter-spacing: -0.025em;
+  white-space: nowrap;
 }
-.monogram {
-  font-size: 32px;
-  letter-spacing: -3px;
-  line-height: 1;
-  font-weight: 700;
-}
-.monogram span {
-  color: var(--blue);
+.brand-surname {
+  font-style: italic;
 }
 .site-nav {
   display: flex;
@@ -670,10 +665,7 @@ h2 {
     height: 72px;
   }
   .brand {
-    font-size: 13px;
-  }
-  .monogram {
-    font-size: 29px;
+    font-size: 21px;
   }
   .menu-toggle {
     display: flex;
