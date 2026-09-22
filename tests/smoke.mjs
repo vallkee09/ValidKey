@@ -70,7 +70,11 @@ for (const html of [home, skills]) {
 }
 for (const file of ["risk-based-test-planning", "release-readiness"]) {
   const response = await fetch(`${base}/playbooks/${file}.md`);
-  assert.equal(response.status, 404);
+  assert.equal(response.status, 200);
+  const retiredPlaybook = await response.text();
+  assert.match(retiredPlaybook, /AI Skills are coming soon/i);
+  assert.doesNotMatch(retiredPlaybook, /Guided workflow/);
+  assert.doesNotMatch(retiredPlaybook, /Step 1/);
 }
 const scripts = [...home.matchAll(/<script\b[^>]*src="([^"]+)"[^>]*>/g)]
   .filter((m) => !m[0].includes("noModule"))
