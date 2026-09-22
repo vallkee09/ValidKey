@@ -1,30 +1,38 @@
-import React from "react"
-import type { Metadata } from 'next'
-import { Analytics } from '@vercel/analytics/next'
-import { SmoothScrollProvider } from '@/components/smooth-scroll-provider'
-import { ScrollProgress } from '@/components/scroll-progress'
-import './globals.css'
-
+import type { Metadata } from "next";
+import { Header } from "@/components/header";
+import { Footer } from "@/components/footer";
+import { isIndexable, siteOrigin } from "@/lib/site";
+import "./globals.css";
+const title = "Valerii Kovalenko — Quality Engineering & AI in QA";
+const description =
+  "Director of Quality Assurance at ODDITY. Quality Engineering, AI in QA, team leadership and career development. Personal consultations and QA + AI Radar.";
 export const metadata: Metadata = {
-  title: 'ValidKey | QA Expert & Mentor - Master QA & AI Testing',
-  description: 'ValidKey offers 10+ years of QA expertise shared through mentorship, courses, and interactive learning. From Junior to Manager - master the art of QA & AI.',
-  generator: 'v0.app',
-}
-
+  title: { default: title, template: "%s | Valerii Kovalenko" },
+  description,
+  ...(siteOrigin ? { metadataBase: new URL(siteOrigin) } : {}),
+  robots: { index: isIndexable, follow: isIndexable },
+  openGraph: {
+    title,
+    description,
+    type: "website",
+    locale: "en_US",
+    siteName: "Valerii Kovalenko",
+  },
+  twitter: { card: "summary", title, description },
+};
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
-      <body className="font-sans antialiased">
-        <SmoothScrollProvider>
-          <ScrollProgress />
-          {children}
-        </SmoothScrollProvider>
-        <Analytics />
+      <body>
+        <a href="#main-content" className="skip-link">
+          Skip to content
+        </a>
+        <Header />
+        {children}
+        <Footer />
       </body>
     </html>
-  )
+  );
 }
