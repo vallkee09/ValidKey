@@ -1,0 +1,82 @@
+name: Validate and deploy website
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: website-${{ github.ref }}
+  cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+
+env:
+  SITE_URL: https://valerii-kovalenko.pages.dev
+  SITE_INDEXABLE: "false"
+  WRANGLER_SEND_METRICS: "false"
+
+jobs:
+  website:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check out source
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version-file: .node-version
+          cache: npm
+
+      - run: npm ci
+      - run: npm test
+      - run: npm run lint
+      - run: npm run build
+
+      - name: Verify exported site in local Cloudflare runtime
+        shell: bash
+        run: |
+          npm run preview > "$RUNNER_TEMP/pages-preview.log" 2>&1 &
+          preview_pid=$!
+          trap 'kill "$preview_pid" 2>/dev/null || true' EXIT
+          ready=false
+          for attempt in {1..30}; do
+            if curl --fail --silent http://127.0.0.1:3101/ > /dev/null; then
+              ready=true
+              break
+            fi
+            if ! kill -0 "$preview_pid" 2>/dev/null; then
+              break
+            fi
+            sleep 1
+          done
+          if [ "$ready" != true ]; then
+            cat "$RUNNER_TEMP/pages-preview.log"
+            exit 1
+          fi
+          npm run test:smoke
+
+      - name: Deploy verified main branch to Cloudflare Pages
+        if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request' && vars.CLOUDFLARE_DEPLOY_ENABLED == 'true'
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: b8f4ec089aaa32c3f451ae12ada9c5e4
+        run: |
+          if [ -z "$CLOUDFLARE_API_TOKEN" ]; then
+            echo "::error::Add the CLOUDFLARE_API_TOKEN repository secret before enabling deployments."
+            exit 1
+          fi
+          npx --no-install wrangler pages deploy out --project-name valerii-kovalenko --branch main --commit-hash "$GITHUB_SHA" --commit-dirty=false
+
+      - name: Explain pending deployment setup
+        if: github.ref == 'refs/heads/main' && vars.CLOUDFLARE_DEPLOY_ENABLED != 'true'
+        run: |
+          echo "### Website checks passed" >> "$GITHUB_STEP_SUMMARY"
+          echo "Automatic deployment is not enabled yet. Add the Cloudflare token as a repository secret, then set CLOUDFLARE_DEPLOY_ENABLED=true. See docs/deployment.md." >> "$GITHUB_STEP_SUMMARY"
